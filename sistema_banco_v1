@@ -1,0 +1,65 @@
+menu = """
+
+[d] Depositar
+[s] Sacar
+[e] Extrato
+[sa] Saldo
+[q] Sair
+
+=> """
+
+saldo = 0
+limite = 500
+extrato = []
+LIMITE_SAQUES = 0
+valor_deposito= 0
+valor_saque= 0
+contador = 0
+
+while True:
+
+    opcao = input(menu)
+
+    if opcao == "d" :
+      
+        valor_deposito = int(input("Digite um valor para depositar: R$ "))
+
+        extrato.append(valor_deposito)
+
+        saldo += valor_deposito
+                                 
+    elif opcao == "s" :  
+         
+         if LIMITE_SAQUES < 3:
+            valor_saque = int(input("Digite um valor para sacar: R$ "))   
+        
+            if valor_saque <= saldo and valor_saque <= limite:
+                saldo += -valor_saque
+                LIMITE_SAQUES += 1
+                                              
+            elif valor_saque >= limite:         
+                print("Limite atingido de saque diario é de R$500, favor refaça a operação!")
+                
+            elif valor_saque > saldo:
+                print("Você não possui saldo suficiente, tente novamente!")
+                
+         else:
+            print("Limite de saque diário atingido, favor refazer a operação!")
+            break
+        
+    elif opcao == "e":
+       
+       for deposito in extrato:
+        print(f"Os valores de deposito foram:R$ {deposito}")
+        
+
+    elif opcao =="sa":
+        print(saldo)
+
+    elif opcao == "q":
+        break
+
+    else:
+        print("Operação inválida,  por favor selecione novamente a operação desejada.")
+
+
